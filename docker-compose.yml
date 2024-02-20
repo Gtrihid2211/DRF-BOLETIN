@@ -1,0 +1,24 @@
+# Use postgres/example user/password credentials
+version: '3.1'
+
+services:
+# https://hub.docker.com/_/postgres
+# https://github.com/cookiecutter/cookiecutter-django
+# https://cookiecutter-django.readthedocs.io/en/latest/developing-locally-docker.html
+  postgres:
+    build:
+      context: .
+      dockerfile: ../APIRestVehiculos/compose/production/postgres/Dockerfile
+    image: django-drf-vehicles_production_postgres
+    container_name: django-drf-vehicles_local_postgres
+    env_file:
+      - ../APIRestVehiculos/.envs/.local/.postgres
+    volumes:
+      - django-drf-vehicles_postgres_data:/var/lib/postgresql/data
+    ports:
+      - 5434:5432
+
+volumes:
+  django-drf-vehicles_postgres_data:
+
+
